@@ -6,10 +6,11 @@ use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
 
 use Carp qw(carp croak);
 use Exporter;
+use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL qw(isa);
 
-$VERSION = "0.010_01";
+$VERSION = "0.100_01";
 
 @EXPORT_OK   = ();
 %EXPORT_TAGS = ();
@@ -25,7 +26,7 @@ File::Find::Closures - functions you can use with File::Find
 	use File::Find;
 	use File::Find::Closures qw(:all);
 
-	my( $list_reporter, $wanted ) = find_by_name( qw(README) );
+	my( $wanted, $list_reporter ) = find_by_name( qw(README) );
 
 	File::Find::find( $wanted, @directories );
 	File::Find::find( { wanted => $wanted, ... }, @directories );
@@ -115,13 +116,14 @@ sub find_by_zero_size
 Find directories which contain files with the same name
 as any of the values in @names.
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_directory_contains
 	{
-	_unimplemented();
+	my @files = ();
+
+	sub { push @files, dirname( canonpath( $File::Find::name ) ) },
+	sub { wantarray ? @files : [ @files ] }
 	}
 
 =item find_by_name( @names );
@@ -175,13 +177,19 @@ sub find_by_regex
 Find files that are owned by the owner with the name OWNER_NAME.
 You can also use the owner's UID.
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_owner
 	{
-	_unimplemented();
+	my $id = getpwnam($_[0]);
+	   $id = $_ unless defined($id);
+
+	unless( $id =~ /\d+/ )
+		{
+		carp "Uid must be numeric of a valid system user name";
+		}
+
+	return _find_by_stat_part_equal( $id, 4 );
 	}
 
 =item find_by_group( GROUP_NAME | GROUP_GID );
@@ -189,13 +197,19 @@ sub find_by_owner
 Find files that are owned by the owner with the name GROUP_NAME.
 You can also use the group's GID.
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_group
 	{
-	_unimplemented();
+	my $id = getgrnam( $_[0] );
+	   $id = $_ unless defined( $id );
+
+	unless( $id =~ /\d+/ )
+		{
+		carp "Gid must be numeric or a valid system user name";
+		}
+
+	return _find_by_stat_part_equal( $id, 5 );
 	}
 
 =item find_by_executable();
@@ -204,13 +218,14 @@ Find files that are executable.  This may not work on some operating
 systems (like Windows) unless someone can provide me with an
 alternate version.
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_executable
 	{
-	_unimplemented();
+	my @files = ();
+	sub { push @files, canonpath( $File::Find::name )
+			if -x },
+	sub { wantarray ? @files : [ @files ] }
 	}
 
 =item find_by_writeable();
@@ -219,13 +234,14 @@ Find files that are writable.  This may not work on some operating
 systems (like Windows) unless someone can provide me with an
 alternate version.
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_writeable
 	{
-	_unimplemented();
+	my @files = ();
+	sub { push @files, canonpath( $File::Find::name )
+			if -w },
+	sub { wantarray ? @files : [ @files ] }
 	}
 
 =item find_by_umask( UMASK );
@@ -233,13 +249,17 @@ sub find_by_writeable
 Find files that fit the umask UMASK.  The files will not have those
 permissions.
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_umask
 	{
-	_unimplemented();
+	my ($mask) = @_;
+
+	my @files;
+
+	sub { push @files, canonpath( $File::Find::name )
+	       	if ((stat($_))[2] & $mask) == 0},
+	sub { wantarray ? @files : [ @files ] }
 	}
 
 =item find_by_modified_before( EPOCH_TIME );
@@ -248,13 +268,11 @@ Find files modified before EPOCH_TIME, which is in seconds since
 the local epoch (I may need to adjust this for some operating
 systems).
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_modified_before
 	{
-	_unimplemented();
+	return _find_by_stat_part_lessthan( $_[0], 9 );
 	}
 
 =item find_by_modified_after( EPOCH_TIME );
@@ -263,13 +281,11 @@ Find files modified after EPOCH_TIME, which is in seconds since
 the local epoch (I may need to adjust this for some operating
 systems).
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_modified_after
 	{
-	_unimplemented();
+	return _find_by_stat_part_greaterthan( $_[0], 9 );
 	}
 
 =item find_by_created_before( EPOCH_TIME );
@@ -278,13 +294,11 @@ Find files created before EPOCH_TIME, which is in seconds since
 the local epoch (I may need to adjust this for some operating
 systems).
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_created_before
 	{
-	_unimplemented();
+	return _find_by_stat_part_lessthan( $_[0], 10 );
 	}
 
 =item find_by_created_after( EPOCH_TIME );
@@ -293,13 +307,44 @@ Find files created after EPOCH_TIME, which is in seconds since
 the local epoch (I may need to adjust this for some operating
 systems).
 
-UNIMPLEMENTED!
-
 =cut
 
 sub find_by_created_after
 	{
-	_unimplemented();
+	return _find_by_stat_part_greaterthan( $_[0], 10 );
+	}
+
+sub _find_by_stat_part_equal 
+	{
+	my ($value, $stat_part) = @_;
+
+	my @files;
+
+	sub { push @files, canonpath( $File::Find::name )
+	       	if (stat($_))[$stat_part] == $value },
+	sub { wantarray ? @files : [ @files ] }
+	}
+
+sub _find_by_stat_part_lessthan 
+	{
+	my ($value, $stat_part) = @_;
+
+	my @files;
+
+	sub { push @files, canonpath( $File::Find::name )
+	       	if (stat($_))[$stat_part] < $value },
+	sub { wantarray ? @files : [ @files ] }
+	}
+
+sub _find_by_stat_part_greaterthan 
+	{
+	my ($value, $stat_part) = @_;
+
+	my @files;
+
+	sub { push @files, canonpath( $File::Find::name )
+	       	if (stat($_))[$stat_part] > $value },
+	sub { wantarray ? @files : [ @files ] }
 	}
 
 
@@ -334,7 +379,6 @@ The filename should be the full path to the file that you get
 from $File::Find::name, unless you are doing something wierd,
 like find_by_directory_contains().
 
-
 Once you have something, send it to me at C<< <bdfoy@cpan.org> >>. You
 must release your code under the Perl Artistic License.
 
@@ -365,6 +409,8 @@ members of the project can shepherd this module appropriately.
 =head1 AUTHOR
 
 brian d foy, C<< <bdfoy@cpan.org> >>
+
+Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT
 
