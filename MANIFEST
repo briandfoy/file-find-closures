@@ -5,6 +5,13 @@ MANIFEST			This list of files
 META.yml			Module meta-data (added by MakeMaker)
 README
 t/compile.t
+t/find_by_group.t
+t/find_by_max_size.t
+t/find_by_min_size.t
+t/find_by_name.t
+t/find_by_owner.t
+t/find_by_regex.t
+t/find_by_zero_size.t
 t/pod.t
 t/pod_coverage.t
 t/prereq.t

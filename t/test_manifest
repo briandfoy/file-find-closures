@@ -3,3 +3,8 @@ compile.t
 pod.t
 pod_coverage.t
 prereq.t
+find_by_name.t
+find_by_zero_size.t
+find_by_min_size.t
+find_by_max_size.t
+find_by_regex.t
