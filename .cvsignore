@@ -1,0 +1,9 @@
+*.gz
+pm_to_blib
+blib
+*.old
+*.bak
+.lwpcookies
+File-Find-Closures-*
+Makefile
+META.yml
