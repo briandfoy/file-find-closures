@@ -10,7 +10,7 @@ use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL qw(isa);
 
-$VERSION = "0.100_01";
+$VERSION = "0.10_03";
 
 @EXPORT_OK   = ();
 %EXPORT_TAGS = ();
@@ -62,6 +62,20 @@ Each factory returns two closures.  The first one is for find(),
 and the second one is the reporter.
 
 =over 4
+
+=item find_regular_files();
+
+Find all regular files.
+
+=cut
+
+sub find_regular_files
+	{	
+	my @files = ();
+	
+	sub { push @files, canonpath( $File::Find::name ) if -f $_ },
+	sub { @files = no_upwards( @files ); wantarray ? @files : [ @files ] }
+	}
 
 =item find_by_min_size( SIZE );
 
