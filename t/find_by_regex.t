@@ -1,4 +1,5 @@
 # $Id$
+use strict;
 
 use File::Basename        qw(basename);
 use File::Find            qw(find);

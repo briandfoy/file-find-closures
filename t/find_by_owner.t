@@ -1,4 +1,5 @@
 # $Id$
+use strict;
 
 use File::Find            qw(find);
 use File::Spec::Functions qw(curdir);
