@@ -1,2 +1,6 @@
 # $Id$
 
+0.010_01 - Thu Sep 30 01:10:59 2004
+* implemented find_by_ (name, regex, max_size, min_size, zero_size)
+* still plenty of functions to implement
+
