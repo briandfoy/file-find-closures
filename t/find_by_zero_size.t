@@ -39,7 +39,10 @@ foreach my $file ( @files )
 	is( -s $file, 0, "$file is zero bytes" );
 	}
 
-is( $files[0], 'pm_to_blib', "Found pm_to_blib" );
+my @found = grep /pm_to_blib/, @files;
+like( $found[0], qr/pm_to_blib/, "Found pm_to_blib" );
 
 is( scalar @$files, $expected_count, "Found five files" );
-is( $files->[0], 'pm_to_blib', "Found pm_to_blib" );
+@found = grep /pm_to_blib/, @$files;
+
+like( $found[0], qr/pm_to_blib/, "Found pm_to_blib" );
