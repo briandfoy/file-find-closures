@@ -10,10 +10,30 @@ use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL qw(isa);
 
-$VERSION = "0.10_03";
+$VERSION = sprintf "%d.%02d", q$Revision$ =~ m/ (\d+) \. (\d+) /xg;
 
-@EXPORT_OK   = ();
-%EXPORT_TAGS = ();
+@EXPORT_OK   = qw(
+	find_regular_files
+	find_by_min_size
+	find_by_max_size
+	find_by_zero_size
+	find_by_directory_contains
+	find_by_name
+	find_by_regex
+	find_by_owner
+	find_by_group
+	find_by_executable
+	find_by_writeable
+	find_by_umask
+	find_by_modified_before
+	find_by_modified_after
+	find_by_created_before
+	find_by_created_after
+	);
+	
+%EXPORT_TAGS = (
+	all => \@EXPORT_OK
+	);
 
 sub _unimplemented { croak "Unimplemented function!" }
 
@@ -37,6 +57,12 @@ File::Find::Closures - functions you can use with File::Find
 
 SOME PARTS ARE NOT IMPLEMENTED YET!  THIS IS ALPHA ALPHA SOFTWARE: A
 MERE SHELL OF AN IDEA.
+
+I wrote this module as an example of both using closures and using
+File::Find. Students are always asking me what closures are good
+for, and here's some examples. The functions mostly stand alone (i.e.
+they don't need the rest of the module), so rather than creating a 
+dependency in your code, just lift the parts you want).
 
 When I use File::Find, I have two headaches---coming up with the
 \&wanted function to pass to find(), and acculumating the files.
@@ -173,16 +199,21 @@ that's what you get.
 
 sub find_by_regex
 	{
+	require File::Spec::Functions;
+	require Carp;
+	require UNIVERSAL;
+	
 	my $regex = shift;
 	
-	unless( isa( $regex, 'Regexp' ) )
+	unless( UNIVERSAL::isa( $regex, 'Regexp' ) )
 		{
-		carp "Argument must be a regular expression";
+		Carp::carp "Argument must be a regular expression";
 		}
 		
 	my @files = ();
 	
-	sub { push @files, canonpath( $File::Find::name ) if m/$regex/ },
+	sub { push @files, 
+		File::Spec::Functions::canonpath( $File::Find::name ) if m/$regex/ },
 	sub { wantarray ? @files : [ @files ] }
 	}
 
@@ -426,9 +457,9 @@ brian d foy, C<< <bdfoy@cpan.org> >>
 
 Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
-=head1 COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2004, brian d foy, All Rights Reserved.
+Copyright (c) 2004-2007, brian d foy, All Rights Reserved.
 
 You may redistribute this under the same terms as Perl itself.
 

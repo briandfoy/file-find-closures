@@ -1,5 +1,15 @@
+# $Id$
+
 use Test::More;
-my $module = "Test::Pod::Coverage";
-eval "use $module 1.00";
-plan skip_all => "$module 1.00 required for testing POD coverage" if $@;
-all_pod_coverage_ok();
+eval "use Test::Pod::Coverage";
+
+if( $@ )
+	{
+	plan skip_all => "Test::Pod::Coverage required for testing POD";
+	}
+else
+	{
+	plan tests => 1;
+
+	pod_coverage_ok( "File::Find::Closures" );      
+	}
