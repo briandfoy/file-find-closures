@@ -29,7 +29,7 @@ my $files = $reporter->();
 isa_ok( $files, 'ARRAY', "Gets anonymous array in scalar context" );
 
 is( scalar @files, $expected_count, "Found one file matching /$regex/" );
-is( $files[0], $name, "Found $name" );
+like( $files[0], qr/\Q$name/, "Found $name" );
 
 is( scalar @$files, $expected_count, "Found one file matching /$regex/" );
-is( $files->[0], $name, "Found $name" );
+like( $files->[0], qr/\Q$name/, "Found $name" );

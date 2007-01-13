@@ -15,7 +15,7 @@ BEGIN {
 
 	}
 	
-use Test::More tests => 9 + $expected_count;
+use Test::More tests => 7 + $expected_count;
 
 use_ok( "File::Find::Closures" );
 
@@ -42,7 +42,4 @@ foreach my $file ( @files )
 	ok( $this_size >= $size, "$file is over $size bytes [$this_size]" );
 	}
 
-is( $files[0], 'Makefile', "Found Makefile" );
-
 is( scalar @$files, $expected_count, "Found right number with less than $size bytes" );
-is( $files->[0], 'Makefile', "Found Makefile" );

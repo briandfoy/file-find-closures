@@ -438,7 +438,7 @@ systems
 
 L<File::Find>
 
-Randal Schwartz's File::Finder, which does the same task, but
+Randal Schwartz's C<File::Finder>, which does the same task but
 differently.
 
 =head1 SOURCE AVAILABILITY
