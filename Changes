@@ -1,5 +1,10 @@
 # $Id$
 
+1.06 - Sat Jan 13 14:56:47 2007
+	* adjusted some tests that were failing because they weren't
+	doing the right thing
+	* No need to upgrade if you already have this installed.
+
 1.05 - Wed Jan 10 00:01:41 2007
 	* updated copyright and license info
 	* no code changes, so no need to upgrade
