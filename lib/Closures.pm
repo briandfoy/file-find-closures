@@ -55,9 +55,6 @@ File::Find::Closures - functions you can use with File::Find
 
 =head1 DESCRIPTION
 
-SOME PARTS ARE NOT IMPLEMENTED YET!  THIS IS ALPHA ALPHA SOFTWARE: A
-MERE SHELL OF AN IDEA.
-
 I wrote this module as an example of both using closures and using
 File::Find. Students are always asking me what closures are good
 for, and here's some examples. The functions mostly stand alone (i.e.
@@ -406,7 +403,7 @@ should write your closures.
 You need to provide both closures.  Start of with the basic subroutine
 stub to do this.  Create a lexical array in the scope of the subroutine.
 The two closures will share this variable.  Create two closures: one
-of give to find() and one to access the lexical array.
+of give to C<find()> and one to access the lexical array.
 
 	sub find_by_foo
 		{
@@ -421,8 +418,8 @@ of give to find() and one to access the lexical array.
 		}
 
 The filename should be the full path to the file that you get
-from $File::Find::name, unless you are doing something wierd,
-like find_by_directory_contains().
+from C<$File::Find::name>, unless you are doing something wierd,
+like C<find_by_directory_contains()>.
 
 Once you have something, send it to me at C<< <bdfoy@cpan.org> >>. You
 must release your code under the Perl Artistic License.
