@@ -6,7 +6,9 @@ eval "use Test::Manifest 1.14";
 WriteMakefile(
 	'NAME'	       => 'File::Find::Closures',
 	'VERSION_FROM' => 'lib/Closures.pm',
-	'LICENSE'       => 'perl',
+	'LICENSE'      => 'perl',
+	'AUTHOR'       => 'brian d foy <bdfoy@cpan.org>',
+
 
 	'PREREQ_PM'    => {
 		'File::Find' => '0',
