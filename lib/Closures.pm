@@ -2,6 +2,9 @@
 package File::Find::Closures;
 use strict;
 
+use warnings;
+no warnings;
+
 use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
 
 use Carp qw(carp croak);

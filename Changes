@@ -11,9 +11,9 @@
 	* bumped version number to 1.x
 
 0.10_03 - Wed Jan 26 12:27:48 2005
-* small documentation and testing fix: no big whoop.
+	* small documentation and testing fix: no big whoop.
 
 0.010_01 - Thu Sep 30 01:10:59 2004
-* implemented find_by_ (name, regex, max_size, min_size, zero_size)
-* still plenty of functions to implement
+	* implemented find_by_ (name, regex, max_size, min_size, zero_size)
+	* still plenty of functions to implement
 
