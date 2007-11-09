@@ -10,7 +10,7 @@ use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL qw(isa);
 
-$VERSION = sprintf "%d.%02d", q$Revision$ =~ m/ (\d+) \. (\d+) /xg;
+$VERSION = 1.07;
 
 @EXPORT_OK   = qw(
 	find_regular_files
