@@ -1,5 +1,10 @@
 # $Id$
 
+1.07 - Fri Nov  9 05:51:33 2007
+	* updates for the move from CVS to SVN, and latest kwalitee
+	* require Perl 5.6
+	* no need to upgrade
+
 1.06 - Sat Jan 13 14:56:47 2007
 	* adjusted some tests that were failing because they weren't
 	doing the right thing
