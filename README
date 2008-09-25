@@ -17,10 +17,9 @@ perldoc directly on the module file.
 
 	perldoc  lib/Closures.pm
 	
-This module is also in CVS on SourceForge
+This module is also in Github:
 
-	http://sourceforge.net/projects/brian-d-foy/
-
+	git://github.com/briandfoy/file-find-closures.git
 
 Enjoy, 
 
