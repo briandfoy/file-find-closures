@@ -14,7 +14,7 @@ ok( defined *File::Find::Closures::find_regular_files{CODE},
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 my @tuples = (
-	[ qw(t    14) ],
+	[ qw(t    15) ],
 	[ qw(lib   1) ],
 	);
 

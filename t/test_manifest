@@ -10,3 +10,4 @@ find_by_min_size.t
 find_by_max_size.t
 find_by_regex.t
 find_by_directory_contains.t
+find_by_stat.t
