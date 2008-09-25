@@ -11,6 +11,7 @@ use_ok( "File::Find::Closures" );
 ok( defined *File::Find::Closures::find_by_directory_contains{CODE}, 
 	"find_by_directory_contains is defined" );
 
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 my @tuples = (
 	[ qw(Closures.pm 2) ],

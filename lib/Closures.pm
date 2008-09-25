@@ -166,11 +166,9 @@ sub find_by_directory_contains
 	my %files = ();
 
 	sub { 
+		return unless exists $contains{$_};
 		my $dir = dirname( canonpath( $File::Find::name ) );
-		
-		next unless exists $contains{$_};
-		next unless grep { -e $_ } @contains;
-		
+			
 		$files{ $dir }++;
 		},
 
@@ -217,9 +215,9 @@ sub find_by_regex
 	
 	my $regex = shift;
 	
-	unless( UNIVERSAL::isa( $regex, 'Regexp' ) )
+	unless( UNIVERSAL::isa( $regex, ref qr// ) )
 		{
-		Carp::carp "Argument must be a regular expression";
+		croak "Argument must be a regular expression";
 		}
 		
 	my @files = ();
