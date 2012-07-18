@@ -14,7 +14,8 @@ WriteMakefile(
 
 
 	'PREREQ_PM'    => {
-		'File::Find' => '0',
+		'File::Find'            => '0',
+		'File::Spec::Functions' => '3.33',
 		},
 
 	META_MERGE => {
