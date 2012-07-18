@@ -1,4 +1,3 @@
-# $Id$
 package File::Find::Closures;
 use strict;
 
