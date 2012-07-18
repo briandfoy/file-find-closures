@@ -15,7 +15,7 @@ the file, you can read it with perldoc.
 If you want to read it before you install it, you can use
 perldoc directly on the module file.
 
-	perldoc  lib/Closures.pm
+	perldoc  lib/File/Find/Closures.pm
 	
 This module is also in Github:
 

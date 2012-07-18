@@ -1,6 +1,6 @@
 Changes
 examples/README
-lib/Closures.pm
+lib/File/Find/Closures.pm
 LICENSE
 Makefile.PL
 MANIFEST
