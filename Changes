@@ -1,5 +1,8 @@
 # $Id$
 
+1.08 - Wed Jul 18 18:24:46 2012
+	* Add the File::Spec::Functions prereq (RT #39826)
+
 1.07 - Fri Nov  9 05:51:33 2007
 	* updates for the move from CVS to SVN, and latest kwalitee
 	* require Perl 5.6
