@@ -1,8 +1,8 @@
-use ExtUtils::MakeMaker;
+use ExtUtils::MakeMaker 6.48;
 
-require 5.006;
+require 5.008;
 
-eval "use Test::Manifest 1.14";
+eval "use Test::Manifest 1.21";
 
 WriteMakefile(
 	'NAME'	       => 'File::Find::Closures',
@@ -24,5 +24,5 @@ WriteMakefile(
 			},
 		},
 
-	);
 	clean  => { FILES    => q|File-Find-Closures-*| },
+	);
