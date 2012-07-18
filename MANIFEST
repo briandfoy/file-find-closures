@@ -4,6 +4,8 @@ lib/File/Find/Closures.pm
 LICENSE
 Makefile.PL
 MANIFEST
+MYMETA.json
+MYMETA.yml
 README
 t/compile.t
 t/find_by_directory_contains.t
