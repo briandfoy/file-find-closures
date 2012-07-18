@@ -5,3 +5,4 @@ cover_db
 blib
 *.bak
 *.old
+MYMETA*
