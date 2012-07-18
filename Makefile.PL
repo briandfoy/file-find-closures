@@ -17,6 +17,11 @@ WriteMakefile(
 		'File::Find' => '0',
 		},
 
-	clean  => { FILES    => q|File-Find-Closures-*| },
+	META_MERGE => {
+		resourses => {
+			repository => 'https://github.com/briandfoy/file-find-closures',
+			},
+		},
 
 	);
+	clean  => { FILES    => q|File-Find-Closures-*| },
