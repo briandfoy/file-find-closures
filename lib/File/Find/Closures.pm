@@ -464,7 +464,7 @@ Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2004-2007, brian d foy, All Rights Reserved.
+Copyright (c) 2004-2012, brian d foy, All Rights Reserved.
 
 You may redistribute this under the same terms as Perl itself.
 
