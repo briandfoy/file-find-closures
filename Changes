@@ -1,5 +1,8 @@
 # $Id$
 
+1.10 - Fri Jan  3 14:12:45 2014
+	* Get rid of MYMETA
+
 1.08 - Wed Jul 18 18:24:46 2012
 	* Add the File::Spec::Functions prereq (RT #39826)
 
