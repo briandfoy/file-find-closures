@@ -7,12 +7,12 @@ no warnings;
 use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
 
 use Carp qw(carp croak);
-use Exporter;
+use Exporter qw(import);
 use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL qw(isa);
 
-$VERSION = '1.08';
+$VERSION = '1.09';
 
 @EXPORT_OK   = qw(
 	find_regular_files
@@ -464,7 +464,7 @@ Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2004-2012, brian d foy, All Rights Reserved.
+Copyright (c) 2004-2014, brian d foy, All Rights Reserved.
 
 You may redistribute this under the same terms as Perl itself.
 
