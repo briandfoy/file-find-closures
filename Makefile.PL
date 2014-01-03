@@ -18,9 +18,14 @@ WriteMakefile(
 		'File::Spec::Functions' => '3.33',
 		},
 
-	META_MERGE => {
-		resourses => {
-			repository => 'https://github.com/briandfoy/file-find-closures',
+	'META_MERGE' => {
+        'meta-spec' => { version => 2 },
+		resources => {
+			repository => {
+				type => 'git',
+				url  => 'git@github.com:briandfoy/file-find-closures.git',
+				web  => 'https://github.com/briandfoy/file-find-closures',
+				},
 			},
 		},
 
