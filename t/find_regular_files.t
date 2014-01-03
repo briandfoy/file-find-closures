@@ -1,10 +1,9 @@
-# $Id$
 use strict;
 
 use File::Find            qw(find);
 use File::Spec::Functions qw(curdir);
 	
-use Test::More tests => 12;
+use Test::More 0.95;
 
 use_ok( "File::Find::Closures" );
 
@@ -20,22 +19,25 @@ my @tuples = (
 
 foreach my $tuple ( @tuples )
 	{
-	my( $dir, $expected_count ) = @$tuple;
+	subtest $tuple->[0] => sub {
+		my( $dir, $expected_count ) = @$tuple;
 	
-	my( $finder, $reporter ) = File::Find::Closures::find_regular_files();
-	isa_ok( $finder,   ref sub {} );
-	isa_ok( $reporter, ref sub {} );
+		my( $finder, $reporter ) = File::Find::Closures::find_regular_files();
+		isa_ok( $finder,   ref sub {} );
+		isa_ok( $reporter, ref sub {} );
 	
-	find( $finder, $dir );
+		find( $finder, $dir );
 	
-	my @files = $reporter->(); 
-	# diag( "Found dirs @dirs" );
+		my @files = $reporter->(); 
+		#diag( "Found files @files" );
 	
-	my $files = $reporter->();
-	isa_ok( $files, ref [], "Gets anonymous array in scalar context" );
+		my $files = $reporter->();
+		isa_ok( $files, ref [], "[$tuple->[0]] Gets anonymous array in scalar context" );
 	
-	is( scalar  @files, $expected_count, "Found right number of regular files" );
+		is( scalar  @files, $expected_count, "[$tuple->[0]] Found right number of regular files" );
 		
-	is( scalar @$files, $expected_count, "Found right number of regular files" );
+		is( scalar @$files, $expected_count, "[$tuple->[0]] Found right number of regular files" );
+		}
 	}
 
+done_testing();
