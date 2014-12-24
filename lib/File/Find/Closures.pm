@@ -10,9 +10,9 @@ use Carp qw(carp croak);
 use Exporter qw(import);
 use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
-use UNIVERSAL qw(isa);
+use UNIVERSAL;
 
-$VERSION = '1.10';
+$VERSION = '1.10_01';
 
 @EXPORT_OK   = qw(
 	find_regular_files
@@ -94,8 +94,7 @@ Find all regular files.
 
 =cut
 
-sub find_regular_files
-	{	
+sub find_regular_files {	
 	my @files = ();
 	
 	sub { push @files, canonpath( $File::Find::name ) if -f $_ },
@@ -108,8 +107,7 @@ Find files whose size is equal to or greater than SIZE bytes.
 
 =cut
 
-sub find_by_min_size
-	{
+sub find_by_min_size {
 	my $min   = shift;
 	
 	my @files = ();
@@ -124,8 +122,7 @@ Find files whose size is equal to or less than SIZE bytes.
 
 =cut
 
-sub find_by_max_size
-	{
+sub find_by_max_size {
 	my $min   = shift;
 	
 	my @files = ();
@@ -140,8 +137,7 @@ Find files whose size is equal to 0 bytes.
 
 =cut
 
-sub find_by_zero_size
-	{
+sub find_by_zero_size {
 	my $min   = shift;
 	
 	my @files = ();
@@ -157,8 +153,7 @@ as any of the values in @names.
 
 =cut
 
-sub find_by_directory_contains
-	{
+sub find_by_directory_contains {
 	my @contains = @_;
 	my %contains = map { $_, 1 } @contains;
 	
@@ -188,8 +183,7 @@ that's what you get.
 
 =cut
 
-sub find_by_name
-	{
+sub find_by_name {
 	my %hash  = map { $_, 1 } @_;
 	my @files = ();
 	
@@ -206,16 +200,14 @@ that's what you get.
 
 =cut
 
-sub find_by_regex
-	{
+sub find_by_regex {
 	require File::Spec::Functions;
 	require Carp;
 	require UNIVERSAL;
 	
 	my $regex = shift;
 	
-	unless( UNIVERSAL::isa( $regex, ref qr// ) )
-		{
+	unless( UNIVERSAL::isa( $regex, ref qr// ) ) {
 		croak "Argument must be a regular expression";
 		}
 		
@@ -233,13 +225,11 @@ You can also use the owner's UID.
 
 =cut
 
-sub find_by_owner
-	{
+sub find_by_owner {
 	my $id = getpwnam($_[0]);
 	   $id = $_ unless defined($id);
 
-	unless( $id =~ /\d+/ )
-		{
+	unless( $id =~ /\d+/ ) {
 		carp "Uid must be numeric of a valid system user name";
 		}
 
@@ -253,13 +243,11 @@ You can also use the group's GID.
 
 =cut
 
-sub find_by_group
-	{
+sub find_by_group {
 	my $id = getgrnam( $_[0] );
 	   $id = $_ unless defined( $id );
 
-	unless( $id =~ /\d+/ )
-		{
+	unless( $id =~ /\d+/ ) {
 		carp "Gid must be numeric or a valid system user name";
 		}
 
@@ -274,8 +262,7 @@ alternate version.
 
 =cut
 
-sub find_by_executable
-	{
+sub find_by_executable {
 	my @files = ();
 	sub { push @files, canonpath( $File::Find::name )
 			if -x },
@@ -290,8 +277,7 @@ alternate version.
 
 =cut
 
-sub find_by_writeable
-	{
+sub find_by_writeable {
 	my @files = ();
 	sub { push @files, canonpath( $File::Find::name )
 			if -w },
@@ -305,8 +291,7 @@ permissions.
 
 =cut
 
-sub find_by_umask
-	{
+sub find_by_umask {
 	my ($mask) = @_;
 
 	my @files;
@@ -324,8 +309,7 @@ systems).
 
 =cut
 
-sub find_by_modified_before
-	{
+sub find_by_modified_before {
 	return _find_by_stat_part_lessthan( $_[0], 9 );
 	}
 
@@ -337,8 +321,7 @@ systems).
 
 =cut
 
-sub find_by_modified_after
-	{
+sub find_by_modified_after {
 	return _find_by_stat_part_greaterthan( $_[0], 9 );
 	}
 
@@ -350,8 +333,7 @@ systems).
 
 =cut
 
-sub find_by_created_before
-	{
+sub find_by_created_before {
 	return _find_by_stat_part_lessthan( $_[0], 10 );
 	}
 
@@ -363,13 +345,11 @@ systems).
 
 =cut
 
-sub find_by_created_after
-	{
+sub find_by_created_after {
 	return _find_by_stat_part_greaterthan( $_[0], 10 );
 	}
 
-sub _find_by_stat_part_equal 
-	{
+sub _find_by_stat_part_equal {
 	my ($value, $stat_part) = @_;
 
 	my @files;
@@ -379,8 +359,7 @@ sub _find_by_stat_part_equal
 	sub { wantarray ? @files : [ @files ] }
 	}
 
-sub _find_by_stat_part_lessthan 
-	{
+sub _find_by_stat_part_lessthan {
 	my ($value, $stat_part) = @_;
 
 	my @files;
@@ -390,8 +369,7 @@ sub _find_by_stat_part_lessthan
 	sub { wantarray ? @files : [ @files ] }
 	}
 
-sub _find_by_stat_part_greaterthan 
-	{
+sub _find_by_stat_part_greaterthan {
 	my ($value, $stat_part) = @_;
 
 	my @files;
