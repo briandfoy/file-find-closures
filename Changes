@@ -1,5 +1,8 @@
 # $Id$
 
+1.10_01 - Tue Dec 23 20:46:06 2014
+	* Don't import isa, which disappears in Perl 5.22
+
 1.10 - Fri Jan  3 14:12:45 2014
 	* Get rid of MYMETA
 
