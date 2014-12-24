@@ -17,8 +17,7 @@ my @tuples = (
 	[ qw(lib   1) ],
 	);
 
-foreach my $tuple ( @tuples )
-	{
+foreach my $tuple ( @tuples ) {
 	subtest $tuple->[0] => sub {
 		my( $dir, $expected_count ) = @$tuple;
 	
