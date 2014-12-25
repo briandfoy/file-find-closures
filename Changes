@@ -1,5 +1,8 @@
 # Changes file for File::Find::Closures
 
+1.11 - Thu Dec 25 10:57:50 2014
+	* Fix for v5.21.7 and UNIVERSAL (RT #101065)
+
 1.10_01 - Tue Dec 23 20:46:06 2014
 	* Don't import isa, which disappears in Perl 5.22
 
