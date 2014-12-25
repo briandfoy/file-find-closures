@@ -12,7 +12,7 @@ use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL;
 
-$VERSION = '1.10_01';
+$VERSION = '1.11';
 
 @EXPORT_OK   = qw(
 	find_regular_files
