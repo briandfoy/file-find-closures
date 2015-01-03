@@ -442,7 +442,7 @@ Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2004-2014, brian d foy, All Rights Reserved.
+Copyright © 2004-2015, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
 You may redistribute this under the same terms as Perl itself.
 
