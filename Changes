@@ -1,4 +1,4 @@
-# Changes file for File::Find::Closures
+Revision history for Perl module 
 
 1.11 - Thu Dec 25 10:57:50 2014
 	* Fix for v5.21.7 and UNIVERSAL (RT #101065)
