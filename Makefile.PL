@@ -2,16 +2,18 @@ require 5.008;
 use strict;
 use warnings;
 
+use File::Spec::Functions qw(catfile);
 
-my $github    = 'https://github.com/briandfoy/';
-my $main_file = 'lib/';
+my $module    = 'File::Find::Closures';
+my $github    = 'https://github.com/briandfoy/file-find-closures';
+my $main_file = catfile( 'lib', split /::/, "$module.pm" );
 
 my %WriteMakefile = (
-	'NAME'	       => 'File::Find::Closures',
+	'NAME'	        => $module,
 	'ABSTRACT_FROM' => $main_file,
-	'VERSION_FROM' => 'lib/File/Find/Closures.pm',
-	'LICENSE'      => 'perl',
-	'AUTHOR'       => 'brian d foy <bdfoy@cpan.org>',
+	'VERSION_FROM'  => $main_file,
+	'LICENSE'       => 'perl',
+	'AUTHOR'        => 'brian d foy <bdfoy@cpan.org>',
 
 	'CONFIGURE_REQUIRES' => {
 		'ExtUtils::MakeMaker' => '6.64',
@@ -25,6 +27,8 @@ my %WriteMakefile = (
 		},
 
 	'PREREQ_PM'     => {
+		'File::Find'            => '0',
+		'File::Spec::Functions' => '3.33',
 		},
 
 	'META_MERGE' => {
@@ -39,22 +43,6 @@ my %WriteMakefile = (
 				web    => "$github/issues",
 				},
 			homepage => $github,
-			},
-		},
-
-	'PREREQ_PM'    => {
-		'File::Find'            => '0',
-		'File::Spec::Functions' => '3.33',
-		},
-
-	'META_MERGE' => {
-        'meta-spec' => { version => 2 },
-		resources => {
-			repository => {
-				type => 'git',
-				url  => 'git@github.com:briandfoy/file-find-closures.git',
-				web  => 'https://github.com/briandfoy/file-find-closures',
-				},
 			},
 		},
 
