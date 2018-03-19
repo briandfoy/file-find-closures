@@ -11,10 +11,11 @@ BEGIN {
 		"Closures.pm"   => 3, # lib/Closures.pm blib/.../Closures.pm
 		"test_manifest" => 4,
 		"Makefile.PL"   => 5,
-		"README"        => 4, # ./README examples/README
+		"README.pod"    => 4, # ./README examples/README
 		"Changes"       => 6,
 		);
 
+	# 13 because there are 13 elements in the list stat() returns
 	*CORE::GLOBAL::stat = sub {
 		return ( $stats{$_[0]} || $Ignore_value ) x 13;
 		};
@@ -59,8 +60,8 @@ foreach my $tuple ( @tuples ) {
 
 	my( $method, $value, $stat_part, $expected_count ) = @{$tuple}[0..3];
 
-#	diag( "method is $method" );
-#	diag( "stat is $stat_part" );
+	# diag( "method is $method" );
+	# diag( "stat is $stat_part" );
 
 	$Ignore_value = $tuple->[-1];
 
@@ -70,7 +71,7 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, "." );
 
 	my @files = $reporter->();
-#	diag( "Found @files" );
+	# diag( "Found @files" );
 	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
 
 	my $files = $reporter->();
