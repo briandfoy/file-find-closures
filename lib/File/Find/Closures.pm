@@ -12,7 +12,7 @@ use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL;
 
-$VERSION = '1.11';
+$VERSION = '1.111';
 
 @EXPORT_OK   = qw(
 	find_regular_files
@@ -444,9 +444,10 @@ Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright © 2004-2015, brian d foy <bdfoy@cpan.org>. All rights reserved.
+Copyright © 2004-2018, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
-You may redistribute this under the same terms as Perl itself.
+You may redistribute this under the same terms as the Artistic License
+2.0.
 
 =cut
 
