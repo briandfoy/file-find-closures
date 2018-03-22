@@ -1,5 +1,8 @@
 Revision history for Perl module 
 
+1.111 2018-03-22T19:15:06Z
+	* Change to Artistic License 2.0
+
 1.11 - 2014-12-25
 	* Fix for v5.21.7 and UNIVERSAL (RT #101065)
 
