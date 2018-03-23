@@ -25,6 +25,8 @@ use Cwd qw(cwd);
 use File::Find;
 use Test::More tests => 28;
 
+my $starting_dir = cwd();
+
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 is( ( stat('Foo.pm')      )[0], 0 );
 is( ( stat('Closures.pm') )[0], 3 );
@@ -69,8 +71,11 @@ foreach my $tuple ( @tuples ) {
 	my( $wanted, $reporter ) =
 		&{"File::Find::Closures::$method"}( $value, $stat_part );
 
+	# Perl v5.8 on Travis would end up in / after the first find()
+	# I don't know why but instead of relying on . I saved the starting
+	# directory at the beginning of the program.
 	diag "Current working directory is " . cwd;
-	File::Find::find( $wanted, "." );
+	File::Find::find( $wanted, $starting_dir );
 
 	my @files = $reporter->();
 	# diag( "Found @files" );
