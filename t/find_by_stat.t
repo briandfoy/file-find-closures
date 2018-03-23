@@ -74,8 +74,9 @@ foreach my $tuple ( @tuples ) {
 	# Perl v5.8 on Travis would end up in / after the first find()
 	# I don't know why but instead of relying on . I saved the starting
 	# directory at the beginning of the program.
-	diag "Current working directory is " . cwd;
+	diag "Current working directory before find is " . cwd;
 	File::Find::find( $wanted, $starting_dir );
+	diag "Current working directory after find is " . cwd;
 
 	my @files = $reporter->();
 	# diag( "Found @files" );
@@ -109,7 +110,9 @@ foreach my $tuple ( @tuples ) {
 	my( $wanted, $reporter ) =
 		&{"File::Find::Closures::$method"}( $value );
 
-	File::Find::find( $wanted, "." );
+	diag "Current working directory before find is " . cwd;
+	File::Find::find( $wanted, $starting_dir );
+	diag "Current working directory after find is " . cwd;
 
 	my @files = $reporter->();
 #	diag( "Found @files" );
