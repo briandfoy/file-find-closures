@@ -21,6 +21,7 @@ BEGIN {
 		};
 	}
 
+use Cwd qw(cwd);
 use File::Find;
 use Test::More tests => 28;
 
@@ -68,6 +69,7 @@ foreach my $tuple ( @tuples ) {
 	my( $wanted, $reporter ) =
 		&{"File::Find::Closures::$method"}( $value, $stat_part );
 
+	diag "Current working directory is " . cwd;
 	File::Find::find( $wanted, "." );
 
 	my @files = $reporter->();
