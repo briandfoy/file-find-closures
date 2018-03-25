@@ -1,5 +1,8 @@
 Revision history for Perl module 
 
+1.112_01 2018-03-25T19:48:54Z
+	* See if CPAN Testers likes this verison
+
 1.111 2018-03-22T19:15:06Z
 	* Change to Artistic License 2.0
 
