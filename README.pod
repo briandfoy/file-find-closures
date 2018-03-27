@@ -2,6 +2,17 @@
 
 =encoding utf8
 
+
+=for HTML <a href="https://travis-ci.org/briandfoy/file-find-closures"><img src="https://travis-ci.org/briandfoy/file-find-closures.svg?branch=master" /></a>
+
+=for HTML <a href='https://ci.appveyor.com/project/briandfoy/file-find-closures'><img src='https://ci.appveyor.com/api/projects/status/s2emx0wu4x75c5uv'></a>
+
+=for HTML <a href='https://coveralls.io/github/briandfoy/file-find-closures?branch=master'><img src='https://coveralls.io/repos/github/briandfoy/file-find-closures/badge.svg?branch=master' alt='Coverage Status' /></a>
+
+=for HTML <a href="https://github.com/briandfoy/file-find-closures/blob/master/LICENSE"><img src="https://img.shields.io/cpan/l/File-Find-Closures.svg" /></a>
+
+=for HTML <a href="http://www.metacpan.org/module/File::Find::Closures"><img src="https://img.shields.io/cpan/v/File-Find-Closures.svg" /></A>
+
 =head1 The File::Find::Closures module
 
 This is the I<README> for the L<File::Find::Closures> Perl module. You're probably
