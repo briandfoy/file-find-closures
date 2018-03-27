@@ -1,5 +1,8 @@
 Revision history for Perl module 
 
+1.112_02 2018-03-27T19:14:00Z
+	* Check CPAN Testers for the latest test changes.
+
 1.112_01 2018-03-25T19:48:54Z
 	* See if CPAN Testers likes this verison
 
