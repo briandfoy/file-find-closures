@@ -117,10 +117,3 @@ foreach my $tuple ( @tuples ) {
 }
 
 __END__
-
-# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-find_by_owner
-find_by_group
-find_by_writeable
-find_by_umask
-find_by_executable
