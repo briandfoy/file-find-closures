@@ -64,9 +64,6 @@ foreach my $tuple ( @tuples ) {
 
 	my( $method, $value, $stat_part, $expected_count ) = @{$tuple}[0..3];
 
-	# diag( "method is $method" );
-	# diag( "stat is $stat_part" );
-
 	$Ignore_value = $tuple->[-1];
 
 	my( $wanted, $reporter ) =
@@ -75,12 +72,9 @@ foreach my $tuple ( @tuples ) {
 	# Perl v5.8 on Travis would end up in / after the first find()
 	# I don't know why but instead of relying on . I saved the starting
 	# directory at the beginning of the program.
-	diag "Current working directory before find is " . cwd;
 	File::Find::find( $wanted, $starting_dir );
-	diag "Current working directory after find is " . cwd;
 
 	my @files = $reporter->();
-	# diag( "Found @files" );
 	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
 
 	my $files = $reporter->();
@@ -103,20 +97,15 @@ foreach my $tuple ( @tuples ) {
 
 	my( $method, $value, $expected_count ) = @{$tuple}[0..2];
 
-#	diag( "method is $method" );
-#	diag( "stat is $stat_part" );
 
 	$Ignore_value = $tuple->[-1];
 
 	my( $wanted, $reporter ) =
 		&{"File::Find::Closures::$method"}( $value );
 
-	diag "Current working directory before find is " . cwd;
 	File::Find::find( $wanted, $starting_dir );
-	diag "Current working directory after find is " . cwd;
 
 	my @files = $reporter->();
-#	diag( "Found @files" );
 	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
 
 	my $files = $reporter->();
