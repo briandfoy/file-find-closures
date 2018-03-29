@@ -23,6 +23,7 @@ BEGIN {
 
 use Cwd qw(cwd);
 use File::Find;
+use File::Spec::Functions qw(abs2rel);
 use Test::More tests => 28;
 
 my $starting_dir = cwd();
@@ -74,8 +75,8 @@ foreach my $tuple ( @tuples ) {
 	# directory at the beginning of the program.
 	File::Find::find( $wanted, $starting_dir );
 
-	my @files = $reporter->();
-	diag( "Found @files" );
+	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
+	diag( "comparison loop: Found @files" );
 	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files for stat.$stat_part with value $value" );
 
 	my $files = $reporter->();
@@ -105,8 +106,8 @@ foreach my $tuple ( @tuples ) {
 
 	File::Find::find( $wanted, $starting_dir );
 
-	my @files = $reporter->();
-	diag( "Found @files" );
+	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
+	diag( "relative loop: Found @files" );
 	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files with value $value" );
 
 	my $files = $reporter->();
