@@ -64,7 +64,7 @@ foreach my $tuple ( @tuples ) {
 
 	my( $method, $value, $stat_part, $expected_count ) = @{$tuple}[0..3];
 
-	$Ignore_value = $tuple->[-1];
+	local $Ignore_value = $tuple->[-1];
 
 	my( $wanted, $reporter ) =
 		&{"File::Find::Closures::$method"}( $value, $stat_part );
@@ -98,8 +98,7 @@ foreach my $tuple ( @tuples ) {
 
 	my( $method, $value, $expected_count ) = @{$tuple}[0..2];
 
-
-	$Ignore_value = $tuple->[-1];
+	local $Ignore_value = $tuple->[-1];
 
 	my( $wanted, $reporter ) =
 		&{"File::Find::Closures::$method"}( $value );
@@ -107,12 +106,11 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = $reporter->();
-	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
 	diag( "Found @files" );
 
 	my $files = $reporter->();
 	isa_ok( $files, ref [] );
-	is( scalar @$files, $expected_count, "$method: Found $expected_count files" );
+	is( scalar @$files, $expected_count, "$method (scalar context): Found $expected_count files with value $value" );
 	}
 }
 
