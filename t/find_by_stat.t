@@ -75,12 +75,12 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = $reporter->();
-	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
 	diag( "Found @files" );
+	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files for stat.$stat_part with value $value" );
 
 	my $files = $reporter->();
 	isa_ok( $files, ref [] );
-	is( scalar @$files, $expected_count, "$method: Found $expected_count files" );
+	is( scalar @$files, $expected_count, "$method (scalar context): Found $expected_count files" );
 	}
 }
 
@@ -107,6 +107,7 @@ foreach my $tuple ( @tuples ) {
 
 	my @files = $reporter->();
 	diag( "Found @files" );
+	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files with value $value" );
 
 	my $files = $reporter->();
 	isa_ok( $files, ref [] );
