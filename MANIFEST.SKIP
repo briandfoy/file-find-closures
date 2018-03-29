@@ -63,5 +63,5 @@
 \.releaserc
 \.lwpcookies
 ^File-.*
-Changes\s3
-MANIFEST\s3
+Changes\s\d
+MANIFEST\s\d
