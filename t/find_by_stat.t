@@ -11,7 +11,7 @@ BEGIN {
 		"Closures.pm"   => 3, # lib/Closures.pm blib/.../Closures.pm
 		"test_manifest" => 4,
 		"Makefile.PL"   => 5,
-		"README.pod"    => 4, # ./README examples/README
+		"README.pod"    => 4, # ./README.pod
 		"Changes"       => 6,
 		);
 
