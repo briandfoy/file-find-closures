@@ -28,8 +28,9 @@ use Test::More tests => 28;
 my $starting_dir = cwd();
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
-is( ( stat('Foo.pm')      )[0], 0 );
-is( ( stat('Closures.pm') )[0], 3 );
+# Test that the first stat value is right
+is( ( stat('Foo.pm')      )[0], $Ignore_value, 'Overloaded stat.0 returns ignored value for missing file'  ); # ignore value
+is( ( stat('Closures.pm') )[0], 3, 'Overloaded stat.0 returns configured value for existing file' );
 
 my $count = () = stat( 'Bar.pm' );
 is( $count, 13, "overloaded stat returns the right number of elements" );
