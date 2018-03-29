@@ -76,6 +76,7 @@ foreach my $tuple ( @tuples ) {
 
 	my @files = $reporter->();
 	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
+	diag( "Found @files" );
 
 	my $files = $reporter->();
 	isa_ok( $files, ref [] );
@@ -107,6 +108,7 @@ foreach my $tuple ( @tuples ) {
 
 	my @files = $reporter->();
 	is( scalar @files, $expected_count, "$method: Found $expected_count files" );
+	diag( "Found @files" );
 
 	my $files = $reporter->();
 	isa_ok( $files, ref [] );
