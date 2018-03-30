@@ -87,7 +87,7 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
-	diag( "comparison loop: Found @files" );
+#	diag( "comparison loop for $method: Found @files" );
 	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files for stat.$stat_part with value $value" );
 
 	my $files = $reporter->();
@@ -118,7 +118,7 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
-	diag( "relative loop: Found @files" );
+#	diag( "relative loop: Found @files" );
 	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files with time value $time_value" );
 
 	my $files = $reporter->();
