@@ -108,22 +108,22 @@ my @tuples = (
 foreach my $tuple ( @tuples ) {
 	no strict 'refs';
 
-	my( $method, $value, $expected_count ) = @{$tuple}[0..2];
+	my( $method, $time_value, $expected_count ) = @{$tuple}[0..2];
 
 	local $Ignore_value = $tuple->[-1];
 
 	my( $wanted, $reporter ) =
-		&{"File::Find::Closures::$method"}( $value );
+		&{"File::Find::Closures::$method"}( $time_value );
 
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
 	diag( "relative loop: Found @files" );
-	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files with value $value" );
+	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files with time value $time_value" );
 
 	my $files = $reporter->();
 	isa_ok( $files, ref [] );
-	is( scalar @$files, $expected_count, "$method (scalar context): Found $expected_count files with value $value" );
+	is( scalar @$files, $expected_count, "$method (scalar context): Found $expected_count files with time value $time_value" );
 	}
 }
 
