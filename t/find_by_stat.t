@@ -19,7 +19,7 @@ BEGIN {
 	$Ignore_value = 0;
 
 	%stats = (
-		"Closures.pm"   => 3, # lib/Closures.pm blib/.../Closures.pm
+		"Closures.pm"   => 3, # x 2 = lib/Closures.pm blib/.../Closures.pm
 		"test_manifest" => 4,
 		"Makefile.PL"   => 5,
 		"MANIFEST"      => 4,
