@@ -5,6 +5,17 @@ use warnings;
 use vars qw( %stats $Ignore_value);
 
 BEGIN {
+
+# Make fake stat records where a file has the same value in every slot.
+# These functions don't care about the semantic meanigs of the numbers.
+# It's all relative comparisons.
+
+# The ignore_value is something you can adjust to move unlisted files
+# outside the window of comparison. When you're looking for files that
+# are greater than a value, $Ignore_value should be low. When you are
+# looking for something that should be less than a value, $Ignore_value
+# should be high.
+
 	$Ignore_value = 0;
 
 	%stats = (
