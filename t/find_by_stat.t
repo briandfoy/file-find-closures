@@ -65,10 +65,10 @@ foreach my $method ( @methods ) {
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 {
 my @tuples = (
-		#  method  value stat_part ignore_value
-	[ qw( _find_by_stat_part_equal       3 4 2   0) ],
-	[ qw( _find_by_stat_part_lessthan    5 4 5 999) ],
-	[ qw( _find_by_stat_part_greaterthan 4 4 2   0) ],
+		#  method  argument stat_part ignore_value
+	[ qw( _find_by_stat_part_equal       3 4 2   0) ], # b?lib/.../Closures.pm
+	[ qw( _find_by_stat_part_lessthan    5 4 4 999) ], # b?lib/.../Closures.pm test_manifest MANIFEST
+	[ qw( _find_by_stat_part_greaterthan 4 4 2   0) ], # Makefile.PL Changes
 	);
 
 foreach my $tuple ( @tuples ) {
@@ -99,10 +99,11 @@ foreach my $tuple ( @tuples ) {
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 {
 my @tuples = (
-	[ qw( find_by_created_after    3 5   0 ) ],
-	[ qw( find_by_created_before   5 5 999 ) ],
-	[ qw( find_by_modified_after   3 5   0 ) ],
-	[ qw( find_by_modified_before  6 6 999 ) ],
+	# method time_value expected_count ignore_value
+	[ qw( find_by_created_after    3 4   0 ) ],
+	[ qw( find_by_created_before   5 4 999 ) ],
+	[ qw( find_by_modified_after   3 4   0 ) ],
+	[ qw( find_by_modified_before  6 5 999 ) ],
 	);
 
 foreach my $tuple ( @tuples ) {
