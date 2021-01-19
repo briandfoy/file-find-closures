@@ -6,10 +6,9 @@ use strict;
 use warnings;
 no warnings;
 
-
-use Carp qw(carp croak);
-use Exporter qw(import);
-use File::Basename qw(dirname);
+use Carp                  qw(carp croak);
+use Exporter              qw(import);
+use File::Basename        qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL;
 
