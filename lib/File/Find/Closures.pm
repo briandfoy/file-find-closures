@@ -6,7 +6,6 @@ use strict;
 use warnings;
 no warnings;
 
-use vars qw( $VERSION @EXPORT_OK %EXPORT_TAGS );
 
 use Carp qw(carp croak);
 use Exporter qw(import);
@@ -14,9 +13,9 @@ use File::Basename qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL;
 
-$VERSION = '1.112_04';
+our $VERSION = '1.113';
 
-@EXPORT_OK   = qw(
+our @EXPORT_OK   = qw(
 	find_regular_files
 	find_by_min_size
 	find_by_max_size
@@ -35,7 +34,7 @@ $VERSION = '1.112_04';
 	find_by_created_after
 	);
 
-%EXPORT_TAGS = (
+our %EXPORT_TAGS = (
 	all => \@EXPORT_OK
 	);
 
