@@ -5,7 +5,6 @@ use warnings;
 use vars qw( %stats $Ignore_value);
 
 BEGIN {
-
 # Make fake stat records where a file has the same value in every slot.
 # These functions don't care about the semantic meanigs of the numbers.
 # It's all relative comparisons.
@@ -74,7 +73,7 @@ my @tuples = (
 foreach my $tuple ( @tuples ) {
 	no strict 'refs';
 
-	my( $method, $value, $stat_part, $expected_count ) = @{$tuple}[0..3];
+	my( $method, $value, $stat_part, $expected_count, $ignore ) = @{$tuple}[0..4];
 
 	local $Ignore_value = $tuple->[-1];
 
@@ -87,7 +86,7 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
-#	diag( "comparison loop for $method: Found @files" );
+	diag( "comparison loop for $method: Found @files" );
 	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files for stat.$stat_part with value $value" );
 
 	my $files = $reporter->();
@@ -119,7 +118,7 @@ foreach my $tuple ( @tuples ) {
 	File::Find::find( $wanted, $starting_dir );
 
 	my @files = map { abs2rel( $_, $starting_dir ) } @{ $reporter->() };
-#	diag( "relative loop: Found @files" );
+	diag( "relative loop: Found @files" );
 	is( scalar @files, $expected_count, "$method (list context): Found $expected_count files with time value $time_value" );
 
 	my $files = $reporter->();
