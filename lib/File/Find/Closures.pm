@@ -434,7 +434,7 @@ differently.
 
 This module is in Github:
 
-	git://github.com/briandfoy/file-find-closures.git
+	https://github.com/briandfoy/file-find-closures.git
 
 =head1 AUTHOR
 
