@@ -1,3 +1,5 @@
+use 5.008;
+
 package File::Find::Closures;
 use strict;
 
