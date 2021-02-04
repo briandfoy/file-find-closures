@@ -1,8 +1,5 @@
 Revision history for Perl module 
 
-1.112_101 2021-02-04T00:44:07Z
-	* Freshen distro, tests pass, remove Travis CI, add Github Actions
-
 1.112_101 2021-01-19T16:20:31Z
 	* try harder with CPAN Testers
 
