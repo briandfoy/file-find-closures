@@ -444,7 +444,7 @@ Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright © 2004-2021, brian d foy <bdfoy@cpan.org>. All rights reserved.
+Copyright © 2004-2022, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
 You may redistribute this under the same terms as the Artistic License
 2.0.
