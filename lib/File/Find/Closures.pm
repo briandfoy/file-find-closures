@@ -148,8 +148,30 @@ alternate version.
 
 sub find_by_executable {
 	my @files = ();
-	sub { push @files, canonpath( $File::Find::name )
-			if -x },
+	sub { push @files, canonpath( $File::Find::name ) if -x },
+	sub { wantarray ? @files : [ @files ] }
+	}
+
+=item find_by_extension( EXTENSIONS )
+
+This function removes any leading C<.> from each value in EXTENSIONS,
+so these are the same:
+
+	my( $finder, $reporter ) = find_by_extension( 't' );
+	my( $finder, $reporter ) = find_by_extension( '.t' );
+
+Internal dots are left alone:
+
+	my( $finder, $reporter ) = find_by_extension( 'tar.gz' );
+
+=cut
+
+sub find_by_extension {
+	my @files = ();
+	my $pattern = join '|', map { s/\A\.//; quotemeta($_) } @_;
+	sub {
+		push @files, canonpath( $File::Find::name ) if m/\.(?:$pattern)\z/;
+		},
 	sub { wantarray ? @files : [ @files ] }
 	}
 
