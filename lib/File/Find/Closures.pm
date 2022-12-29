@@ -15,22 +15,23 @@ use UNIVERSAL;
 our $VERSION = '1.114';
 
 our @EXPORT_OK   = qw(
-	find_regular_files
-	find_by_min_size
-	find_by_max_size
-	find_by_zero_size
-	find_by_directory_contains
-	find_by_name
-	find_by_regex
-	find_by_owner
-	find_by_group
-	find_by_executable
-	find_by_writeable
-	find_by_umask
-	find_by_modified_before
-	find_by_modified_after
-	find_by_created_before
 	find_by_created_after
+	find_by_created_before
+	find_by_directory_contains
+	find_by_executable
+	find_by_extension
+	find_by_group
+	find_by_max_size
+	find_by_min_size
+	find_by_modified_after
+	find_by_modified_before
+	find_by_name
+	find_by_owner
+	find_by_regex
+	find_by_umask
+	find_by_writeable
+	find_by_zero_size
+	find_regular_files
 	);
 
 our %EXPORT_TAGS = (
