@@ -12,7 +12,7 @@ use File::Basename        qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL;
 
-our $VERSION = '1.114';
+our $VERSION = '1.115';
 
 our @EXPORT_OK   = qw(
 	find_by_created_after
@@ -148,8 +148,30 @@ alternate version.
 
 sub find_by_executable {
 	my @files = ();
-	sub { push @files, canonpath( $File::Find::name )
-			if -x },
+	sub { push @files, canonpath( $File::Find::name ) if -x },
+	sub { wantarray ? @files : [ @files ] }
+	}
+
+=item find_by_extension( EXTENSIONS )
+
+This function removes any leading C<.> from each value in EXTENSIONS,
+so these are the same:
+
+	my( $finder, $reporter ) = find_by_extension( 't' );
+	my( $finder, $reporter ) = find_by_extension( '.t' );
+
+Internal dots are left alone:
+
+	my( $finder, $reporter ) = find_by_extension( 'tar.gz' );
+
+=cut
+
+sub find_by_extension {
+	my @files = ();
+	my $pattern = join '|', map { my $s = $_; $s =~ s/\A\.//; quotemeta($s) } @_;
+	sub {
+		push @files, canonpath( $File::Find::name ) if m/\.(?:$pattern)\z/;
+		},
 	sub { wantarray ? @files : [ @files ] }
 	}
 
@@ -443,7 +465,7 @@ Some functions implemented by Nathan Wagner, C<< <nw@hydaspes.if.org> >>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright © 2004-2022, brian d foy <bdfoy@cpan.org>. All rights reserved.
+Copyright © 2004-2023, brian d foy <bdfoy@cpan.org>. All rights reserved.
 
 You may redistribute this under the same terms as the Artistic License
 2.0.
