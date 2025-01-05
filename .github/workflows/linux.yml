@@ -116,7 +116,7 @@ jobs:
                 cd ..
                 pwd
                 ls
-                rm -rfv HTML-Tagset-3.24.tar.gz HTM-Tagset-3.24
+                rm -rfv HTML-Tagset-*
 # I had some problems with openssl on Ubuntu, so I punted by installing
 # cpanm first, which is easy. I can install IO::Socket::SSL with that,
 # then switch back to cpan. I didn't explore this further, but what you
