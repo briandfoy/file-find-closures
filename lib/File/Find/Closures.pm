@@ -12,7 +12,7 @@ use File::Basename        qw(dirname);
 use File::Spec::Functions qw(canonpath no_upwards);
 use UNIVERSAL;
 
-our $VERSION = '1.116';
+our $VERSION = '1.117';
 
 our @EXPORT_OK   = qw(
 	find_by_created_after
